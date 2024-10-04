@@ -82,7 +82,7 @@ class Video_player:
 				self.img = ImageTk.PhotoImage(image=Image.fromarray(resized_down))
 				self.label.img = self.img
 				self.label.config(image=self.img)
-				# Над этой частью нужно еще поработать. Увеличение ползунка работает, но видео начинает очень сильно зависать
+				# TODO: Fix the slider
 				# -------------------------------------
 				# frame_number = self.scale.get()+1
 				# self.scale.set(frame_number)
@@ -91,12 +91,10 @@ class Video_player:
 		else:
 			self.vid.release()
 
-	# Перемотка при помощи ползунка работает исправно, но он не увеличивается
 	def scale_vid_remove(self, val):
 		frame_num = int(self.var.get())
 		self.vid.set(cv2.CAP_PROP_POS_FRAMES, frame_num)
 
-	# Перемотка при помощи кнопок работает исправно
 	def back_vid(self):
 		current_time = self.vid.get(cv2.CAP_PROP_POS_MSEC)
 		pos = self.vid.set(cv2.CAP_PROP_POS_MSEC, current_time-10000)
